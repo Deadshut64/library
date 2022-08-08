@@ -2,6 +2,7 @@ package com.example.library.controller;
 
 import com.example.library.model.Client;
 import com.example.library.service.ClientService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,15 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 public class ClientController  {
 
     private ClientService clientService;
-
-    @Autowired
-    public ClientController(ClientService clientService){
-        this.clientService = clientService;
-    }
 
     @PostMapping(value = "/clients")
     public ResponseEntity<?> create(@RequestBody Client client) {

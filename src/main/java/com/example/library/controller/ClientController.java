@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
 public class ClientController  {
 
-    private ClientService clientService;
+    private final ClientService clientService;
 
     @PostMapping(value = "/clients")
     public ResponseEntity<?> create(@RequestBody Client client) {

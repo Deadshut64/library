@@ -2,22 +2,21 @@ package com.example.library.service;
 
 import com.example.library.model.Client;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
 @Service
-public class Impl implements ClientService{
+public class ClientServiceImpl implements ClientService{
 
     private static final Map<Integer,Client> listClients = new ConcurrentHashMap<>();
-
+    private final AtomicInteger ID = new AtomicInteger();
     @Override
     public void create(Client client) {
-        int id =+ 1;
+        int id = ID.incrementAndGet();
         client.setId(id);
         listClients.put(id,client);
     }

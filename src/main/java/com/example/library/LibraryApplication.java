@@ -1,6 +1,6 @@
 package com.example.library;
 
-import com.example.library.connection.Connection;
+import com.example.library.model.connection.Connection;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

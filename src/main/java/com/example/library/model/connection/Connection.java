@@ -1,4 +1,4 @@
-package com.example.library.connection;
+package com.example.library.model.connection;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;

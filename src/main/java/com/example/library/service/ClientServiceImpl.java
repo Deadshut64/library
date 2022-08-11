@@ -2,6 +2,7 @@ package com.example.library.service;
 
 import com.example.library.model.Client;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,4 +46,6 @@ public class ClientServiceImpl implements ClientService{
     public boolean delete(int id) {
         return listClients.remove(id) != null;
     }
-}
+
+    }
+

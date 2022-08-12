@@ -1,50 +1,57 @@
 package com.example.library.service;
 
 import com.example.library.model.Client;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
 @Service
 public class ClientServiceImpl implements ClientService{
 
-    private static final Map<Integer,Client> listClients = new ConcurrentHashMap<>();
-    private final AtomicInteger ID = new AtomicInteger();
+    private JdbcTemplate jdbcTemplate;
     @Override
-    public void create(Client client) {
-        int id = ID.incrementAndGet();
-        client.setId(id);
-        listClients.put(id,client);
+    public int create(Client client) {
+        return jdbcTemplate.update(
+                "insert into person (person_id, first_name, last_name) values(?,?,?)",
+                client.getId(),client.getFirstName(),client.getLastName());
     }
 
     @Override
     public List<Client> readAll() {
-        return new ArrayList<>(listClients.values());
+        return jdbcTemplate.query(
+                "select * from person",
+                (rs, rowNum) ->
+                        new Client(
+                                rs.getInt(1),
+                                rs.getString(2),
+                                rs.getString(3)
+                        )
+        );
     }
 
     @Override
     public Client read(int id) {
-        return listClients.get(id);
+        return jdbcTemplate.query(
+                "select * from person where person_id = ?",
+                
+        );
+
     }
 
     @Override
     public boolean update(Client client, int id) {
-        if (listClients.containsKey(id)){
-            client.setId(id);
-            listClients.put(id, client);
-            return true;
-        }
-        return false;
+        return jdbcTemplate.update(
+                "update Person set first_name = ? where id = ?",
+                client.getFirstName(), client.getId()) > 0;
     }
 
     @Override
     public boolean delete(int id) {
-        return listClients.remove(id) != null;
+        return jdbcTemplate.update(
+                "delete Person where person_id = ?", id) > 0;
     }
 
     }

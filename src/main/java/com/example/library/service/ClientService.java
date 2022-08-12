@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ClientService {
 
-    void create(Client client);
+    int create(Client client);
 
     List<Client> readAll();
 

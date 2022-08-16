@@ -34,9 +34,10 @@ public class ClientServiceImpl implements ClientService{
 
     @Override
     public Client read(int id) {
+        String qwer = "select * from person where person_id = ?";
         return jdbcTemplate.query(
-                "select * from person where person_id = ?",
-                
+                ,
+
         );
 
     }

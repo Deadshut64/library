@@ -1,18 +1,18 @@
 package com.example.library.service;
 
 import com.example.library.model.Client;
+import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
+@RequiredArgsConstructor()
 @Service
 public class ClientServiceImpl implements ClientService{
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
     @Override
     public int create(Client client) {
         return jdbcTemplate.update(
@@ -35,16 +35,16 @@ public class ClientServiceImpl implements ClientService{
 
     @Override
     public Client read(int id) {
-        return jdbcTemplate.queryForObject(
-                "select * from person where person_id = ?",
-                new Object[]{id}, Client.class);
+        List<Client>clients = jdbcTemplate.query(
+                "select * from person where person_id=?",new BeanPropertyRowMapper<Client>(Client.class),2);
+        return clients.isEmpty()?null:clients.get(0);
 
     }
 
     @Override
     public boolean update(Client client, int id) {
         return jdbcTemplate.update(
-                "update Person set first_name = ? where id = ?",
+                "update Person set first_name = ? where person_id = ?",
                 client.getFirstName(), client.getId()) > 0;
     }
 

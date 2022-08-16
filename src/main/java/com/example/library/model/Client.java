@@ -1,39 +1,39 @@
 package com.example.library.model;
 
 public class Client {
-     private Integer id;
-     private String firstname;
-     private String lastname;
+     private Integer person_id;
+     private String first_name;
+     private String last_name;
 
 
      public Client(Integer id, String firstname, String lastname){
-         this.id = id;
-         this.firstname = firstname;
-         this.lastname = lastname;
+         this.person_id = id;
+         this.first_name = firstname;
+         this.last_name = lastname;
 
      }
 
      public Integer getId(){
-         return id;
+         return person_id;
      }
 
      public void setId(Integer id){
-         this.id = id;
+         this.person_id = id;
      }
 
      public String getFirstName(){
-         return firstname;
+         return first_name;
      }
 
      public void setFirstName(String firstname){
-         this.firstname = firstname;
+         this.first_name = firstname;
      }
 
     public String getLastName(){
-        return lastname;
+        return last_name;
     }
 
-    public void setEmail(String email) {
-        this.lastname = lastname;
+    public void setLastName(String lastname) {
+        this.last_name = lastname;
     }
 }

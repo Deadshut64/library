@@ -2,6 +2,7 @@ package com.example.library.service;
 
 import com.example.library.model.Client;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,11 +35,9 @@ public class ClientServiceImpl implements ClientService{
 
     @Override
     public Client read(int id) {
-        String qwer = "select * from person where person_id = ?";
-        return jdbcTemplate.query(
-                ,
-
-        );
+        return jdbcTemplate.queryForObject(
+                "select * from person where person_id = ?",
+                new Object[]{id}, Client.class);
 
     }
 

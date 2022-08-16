@@ -16,13 +16,13 @@ public class ClientController  {
 
     private final ClientService clientService;
 
-    @PostMapping(value = "/clients")
+    @PostMapping(value = "/person")
     public ResponseEntity<?> create(@RequestBody Client client) {
         clientService.create(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/clients")
+    @GetMapping(value = "/person")
     public ResponseEntity<List<Client>> read() {
         final List<Client> clients = clientService.readAll();
 
@@ -31,7 +31,7 @@ public class ClientController  {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/clients/{id}")
+    @GetMapping(value = "/person/{id}")
     public ResponseEntity<Client> read(@PathVariable(name = "id") int id) {
         final Client client = clientService.read(id);
 
@@ -39,7 +39,7 @@ public class ClientController  {
                 ? new ResponseEntity<>(client, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @PutMapping(value = "/clients/{id}")
+    @PutMapping(value = "/person/{id}")
     public ResponseEntity<?> update(@PathVariable(name = "id") int id, @RequestBody Client client) {
         final boolean updated = clientService.update(client, id);
 
@@ -48,7 +48,7 @@ public class ClientController  {
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @DeleteMapping(value = "/clients/{id}")
+    @DeleteMapping(value = "/person/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") int id) {
         final boolean deleted = clientService.delete(id);
 
